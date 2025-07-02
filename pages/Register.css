@@ -1,0 +1,81 @@
+.big-form-container {
+  display: flex;
+  /* background-color: #f44336;  a nicer red */
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 350px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] ,
+.form-container input[type ="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-container input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+.form-container a {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #2196f3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
