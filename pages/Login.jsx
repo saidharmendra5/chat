@@ -1,11 +1,12 @@
 
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import { useContext, useState } from 'react';
 import {Link ,  Navigate,  Outlet,  useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
-  
+  const [loginState , setLoginState] = useState(null);
+  const navigate = useNavigate();
    const {
      register,
       handleSubmit, 
@@ -24,7 +25,26 @@ const Login = () => {
 const onSubmit = async (data) => {
     // await delay(3)                                //to simulate network delay
      console.log(data);
+     try{
 
+     const response = await fetch('http://localhost:8000/chat/login' ,{
+      method: 'POST',
+      credentials: 'include', // to send & receive cookies.
+      headers : {"content-type":"application/json"},
+      body: JSON.stringify(data)
+     })
+     const result = await response.json();
+     console.log("response" , response , "result : " , result);
+     if(! response.ok){
+      setLoginState(result.message);
+     }else{
+      setLoginState("login successful");
+      navigate('/app/chat')
+     }
+    }catch(err){
+      console.log("error :" ,err);
+      setLoginState("Server or network error | try again later");
+    }
 }
 
   return (
@@ -34,9 +54,9 @@ const onSubmit = async (data) => {
       
       {isSubmitting && <div className="loader-overlay"> <div className="spinner"></div></div>}
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input placeholder="username" {...register("username" , {required:{value: true , message: "* username is required"}})}type="text"  />  
+            <input placeholder="email" {...register("email" , {required:{value: true , message: "* email is required"}})}type="email"  />  
             <br />
-            {errors.username &&  <div> {errors.username.message}</div> }
+            {errors.email &&  <div> {errors.email.message}</div> }
             <br />
             <input placeholder="password" {...register("password" ,{ required:{value:true , message: "* password is required"}})} type="password"  />
             <br />
@@ -47,6 +67,7 @@ const onSubmit = async (data) => {
             
       
         </form>
+        {loginState && <p>{loginState}</p>}
     </div>
     </div>
   )

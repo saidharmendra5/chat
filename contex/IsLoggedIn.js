@@ -1,3 +1,3 @@
-const { createContext } = require("react");
+import { createContext } from "react";
 
-const IsLoggedIn = createContext();
+export const UserDetails = createContext()

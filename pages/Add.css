@@ -1,0 +1,92 @@
+.add-friend-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.add-friend-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.add-friend-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-friend-container input[type="email"],
+.add-friend-container input[type="submit"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.add-friend-container input[type="email"]:focus {
+  border-color: #5e9eff;
+}
+
+.add-friend-container input[type="submit"] {
+  background-color: #5e9eff;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.add-friend-container input[type="submit"]:hover {
+  background-color: #4a8de8;
+}
+
+.add-friend-container div {
+  text-align: center;
+  margin-top: 10px;
+  color: #2d6a4f;
+  font-weight: 500;
+}
+
+.add-friend-container .error-message {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-top: -8px;
+  text-align: left;
+}
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #5e9eff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

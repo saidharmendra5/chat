@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { io } from 'socket.io-client'
 import './Chatapp.css';
+import Login from './Login';
+import ChatList from './ChatList';
 
 //set the url for sockets:
 // ✅ Correct socket URL
@@ -14,7 +16,7 @@ const Chatapp = () => {
     formState: { errors, isSubmitting }
   } = useForm();
 
-  const [messagelist, setMessageList] = useState(["hi", "hello!!"]);
+  const [messagelist, setMessageList] = useState([]);
 
   useEffect(() => {
     // ✅ Listen for incoming messages from server
@@ -36,24 +38,31 @@ const Chatapp = () => {
   };
 
   return (
-    <div className='big'>
-      <h2>Messenger</h2>
-      <div className='chat-area'>
-        {messagelist.map((msg, i) => (
-          <div key={i}>{msg}</div>
-        ))}
+    <div className="holder">
+      <ChatList />
+  <div className="big">
+    
+  <h2>Messenger</h2>
 
-        <div className='send-msg'>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="text"
-              {...register("msgtosend", { required: true })}
-            />
-            <input type="submit" value="Send" />
-          </form>
-        </div>
-      </div>
-    </div>
+  {/* Chat area with scrollbar */}
+  <div className="chat-area">
+    {messagelist.map((msg, i) => (
+      <div key={i}>{msg}</div>
+    ))}
+  </div>
+
+  {/* Input area - fixed below the scroll */}
+  <div className="send-msg">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="text"
+        {...register("msgtosend", { required: true })}
+      />
+      <input type="submit" value="Send" />
+    </form>
+  </div>
+</div>
+</div>
   );
 };
 

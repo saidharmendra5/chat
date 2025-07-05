@@ -5,6 +5,10 @@ body, html {
   padding: 0;
   height: 100%;
 }
+.holder{
+  display: grid;
+  grid-template-columns: 15% 80%;
+}
 
 .big {
   display: flex;
@@ -26,18 +30,39 @@ h2 {
 .chat-area {
   background: white;
   width: 100%;
-  max-width: 80vw;        /* Responsive width */
-  height: 75vh;           /* Taller height */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  max-width: 80vw;
+  height: 60vh;               /* Reduced height to leave space for input */
+  overflow-y: auto;
+  scroll-behavior: smooth;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 15px;
   box-sizing: border-box;
-  overflow-y: auto;
-  scroll-behavior: smooth;
+  margin-bottom: 10px;
 }
+.chat-area::-webkit-scrollbar {
+  display: none;              /* Chrome, Safari, Opera */
+}
+
+.send-msg {
+  width: 100%;
+  max-width: 80vw;
+}
+
+.send-msg form {
+  display: flex;
+  gap: 10px;
+}
+
+.send-msg input[type="text"] {
+  flex: 1;
+  padding: 8px;
+}
+
+.send-msg input[type="submit"] {
+  padding: 8px 16px;
+}
+
 
 .chat-area > div {
   margin: 6px 0;
