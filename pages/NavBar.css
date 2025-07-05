@@ -6,7 +6,10 @@
   background-color: #333;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-
+.nav-bar h3{
+  color: white;
+  justify-self: left;
+}
 .nav-link {
   color: #fff;
   text-decoration: none;
