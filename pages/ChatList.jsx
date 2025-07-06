@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ChatList.css';
+import { UserDetails } from '../contex/IsLoggedIn';
 
 const ChatList = () => {
   const [friends, setFriends] = useState([]);
+  const{onlineUserslist} = useContext(UserDetails);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -37,6 +39,10 @@ const ChatList = () => {
           <button key={index} className="chatlist-button">
     {val.fullname}
     <span className="email">{val.email}</span>
+    <span className={onlineUserslist.includes(val._id) ? 'online' : 'offline'}>
+  {onlineUserslist.includes(val._id) ? 'online' : 'offline'}
+</span>
+
   </button>
         ))}
       </div>

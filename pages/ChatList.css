@@ -51,3 +51,12 @@
   color: #666;
   margin-top: 2px;
 }
+.online {
+  color: green;
+  font-weight: bold;
+}
+
+.offline {
+  color: gray;
+  font-weight: normal;
+}

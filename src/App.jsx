@@ -13,6 +13,7 @@ import Profile from '../pages/Profile'
 
 function App() {
   const [loggeduser , setLoggedUser] = useState([]);
+  const [onlineUserslist , setOnlineUsersList] = useState([]);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<RootLayout />}>
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <>
-    <UserDetails.Provider value={{loggeduser , setLoggedUser}}>
+    <UserDetails.Provider value={{loggeduser , setLoggedUser ,onlineUserslist , setOnlineUsersList}}>
     <RouterProvider router={router} />
     </UserDetails.Provider>
     </>

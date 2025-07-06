@@ -6,7 +6,7 @@ import ChatList from './ChatList';
 import { UserDetails } from '../contex/IsLoggedIn';
 
 const Chatapp = () => {
-  const { loggeduser ,onlineUserslist , setOnlineUsersList } = useContext(UserDetails);
+  const { loggeduser } = useContext(UserDetails);
   const socket = useRef(null);
   const [messagelist, setMessageList] = useState([]);
 
@@ -19,22 +19,13 @@ const Chatapp = () => {
   // Connect socket once user is logged in
   useEffect(() => {
     if (loggeduser && !socket.current) {
-      socket.current = io('http://localhost:8000' , {
-        query:{
-          userId : loggeduser._id
-        }
-      });
+      socket.current = io('http://localhost:8000');
       console.log("socket is connected");
 
       // Listen for messages
       socket.current.on('message', (msg) => {
         setMessageList((prev) => [...prev, msg]);
       });
-
-      socket.current.on('getOnlineUsers' , (onlineusers) => {
-        console.log("online users : " , onlineusers);
-        setOnlineUsersList(onlineusers);
-      })
     }
 
     // Cleanup function - only runs when component unmounts or dependencies change

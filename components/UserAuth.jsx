@@ -21,6 +21,7 @@ const UserAuth = ({ children }) => {
         if (response.ok) {
           setIsAuthenticated(true);
           console.log("authenticated : user details from server : ", result.user);
+          
           setLoggedUser(result.user);
         } else {
           navigate('/');

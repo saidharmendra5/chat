@@ -13,7 +13,7 @@ const NavBar = () => {
         <NavLink to="add" className="nav-link">Add Friends</NavLink>
         <NavLink to="about" className="nav-link">About</NavLink>
         
-        <NavLink to="profile" className="nav-link">{loggeduser.fullname}</NavLink>
+        <NavLink to="profile" className="nav-link">Profile</NavLink>
 
       </div>
       <Outlet />
