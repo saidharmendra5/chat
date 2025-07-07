@@ -35,6 +35,7 @@ const Chatapp = () => {
         console.log("online users : " , onlineusers);
         setOnlineUsersList(onlineusers);
       })
+      
     }
 
     // Cleanup function - only runs when component unmounts or dependencies change

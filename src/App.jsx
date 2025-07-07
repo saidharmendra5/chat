@@ -9,11 +9,13 @@ import Add from '../pages/Add'
 import UserAuth from '../components/UserAuth'
 import { UserDetails } from '../contex/IsLoggedIn'
 import Profile from '../pages/Profile'
+import About from '../pages/About'
 
 
 function App() {
   const [loggeduser , setLoggedUser] = useState([]);
   const [onlineUserslist , setOnlineUsersList] = useState([]);
+  const [selecteduser , setSelecteduser] = useState(null);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<RootLayout />}>
@@ -22,6 +24,7 @@ function App() {
         <Route path='app' element={<UserAuth><NavBar /></UserAuth> } >
         <Route path='chat' element={<Chatapp />} />
         <Route path='add' element={<Add />} />
+        <Route path='about' element={<About />} />
         <Route path='profile' element={<Profile />} />
         </Route>
       </Route>
@@ -30,7 +33,7 @@ function App() {
 
   return (
     <>
-    <UserDetails.Provider value={{loggeduser , setLoggedUser ,onlineUserslist , setOnlineUsersList}}>
+    <UserDetails.Provider value={{loggeduser , setLoggedUser ,onlineUserslist , setOnlineUsersList , selecteduser , setSelecteduser}}>
     <RouterProvider router={router} />
     </UserDetails.Provider>
     </>

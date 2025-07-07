@@ -35,16 +35,24 @@ const ChatList = () => {
     <div className="chatlist-container">
       <h2 className="chatlist-title">Friends</h2>
       <div className="chatlist-buttons">
-        {friends.map((val, index) => (
-          <button key={index} className="chatlist-button">
-    {val.fullname}
-    <span className="email">{val.email}</span>
-    <span className={onlineUserslist.includes(val._id) ? 'online' : 'offline'}>
-  {onlineUserslist.includes(val._id) ? 'online' : 'offline'}
+        {friends.map((val, index) => {
+  const isOnline = onlineUserslist.includes(val._id);
+
+  return (
+    <button key={index} className="chatlist-button">
+      <div className="user-info">
+        <span className="username">
+  {val.fullname}
+  {isOnline && <span className="status-dot green" title="Online"></span>}
 </span>
 
-  </button>
-        ))}
+        <span className="email">{val.email}</span>
+      </div>
+    </button>
+  );
+})}
+
+
       </div>
     </div>
   );
