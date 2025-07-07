@@ -4,7 +4,7 @@ import { UserDetails } from '../contex/IsLoggedIn';
 
 const ChatList = () => {
   const [friends, setFriends] = useState([]);
-  const{onlineUserslist} = useContext(UserDetails);
+  const{onlineUserslist , selecteduser , setSelecteduser} = useContext(UserDetails);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -39,7 +39,14 @@ const ChatList = () => {
   const isOnline = onlineUserslist.includes(val._id);
 
   return (
-    <button key={index} className="chatlist-button">
+    <button key={index} onClick={() => {
+      setSelecteduser({ 
+  _id: val._id, 
+  fullname: val.fullname, 
+  email: val.email 
+});
+
+    }} className="chatlist-button">
       <div className="user-info">
         <span className="username">
   {val.fullname}

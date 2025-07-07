@@ -6,7 +6,7 @@ import { UserDetails } from '../contex/IsLoggedIn';
 const NavBar = () => {
   const {loggeduser} = useContext(UserDetails);
   return (
-    <>
+    <div className='main-container'>
       <div className='nav-bar'>
         
         <NavLink to="chat" className="nav-link">Chat</NavLink>
@@ -17,7 +17,7 @@ const NavBar = () => {
 
       </div>
       <Outlet />
-    </>
+    </div>
   )
 }
 

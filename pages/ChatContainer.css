@@ -1,0 +1,40 @@
+.chat-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  background-color: #f5f7fa;
+  height: calc(100vh - 80px); /* account for navbar */
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  
+  overflow-y: hidden;
+}
+
+/* ChatList (left panel) */
+.chat-container > :first-child {
+  flex: 0 0 auto;
+  overflow-y: auto;
+}
+
+/* Chatapp or NoSelectedChat (right panel) */
+.chat-container > :last-child {
+  flex: 2;
+  overflow-y: auto;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 768px) {
+  .chat-container {
+    flex-direction: column;
+    padding: 16px;
+    height: auto; /* Let it grow naturally on mobile */
+  }
+
+  .chat-container > :first-child,
+  .chat-container > :last-child {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+}

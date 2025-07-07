@@ -10,6 +10,7 @@ import UserAuth from '../components/UserAuth'
 import { UserDetails } from '../contex/IsLoggedIn'
 import Profile from '../pages/Profile'
 import About from '../pages/About'
+import ChatContainer from '../pages/ChatContainer'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         <Route index element={<Login />} />
         <Route path='register' element={<Register />} />
         <Route path='app' element={<UserAuth><NavBar /></UserAuth> } >
-        <Route path='chat' element={<Chatapp />} />
+        <Route path='chat' element={<ChatContainer />} />
         <Route path='add' element={<Add />} />
         <Route path='about' element={<About />} />
         <Route path='profile' element={<Profile />} />

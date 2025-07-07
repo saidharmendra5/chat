@@ -1,24 +1,41 @@
 .chatlist-container {
-  max-width: 350px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 16px;
+  max-width: 350px; /* reduced width */
+  margin: 20px;
+  padding: 16px;
+  border-radius: 14px;
   background-color: #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
   font-family: 'Segoe UI', sans-serif;
+  height: calc(100vh - 170px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .chatlist-title {
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: bold;
   color: #333;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .chatlist-buttons {
+  flex-grow: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+/* Optional scrollbar styling */
+.chatlist-buttons::-webkit-scrollbar {
+  width: 6px;
+}
+.chatlist-buttons::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
 }
 
 .chatlist-button {
@@ -27,51 +44,49 @@
   text-align: left;
   background-color: #f4f4f4;
   border: none;
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 10px;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
 
 .chatlist-button:hover {
-  background-color: #eaeaea;
+  background-color: #e8e8e8;
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .user-name-status {
   margin-bottom: 4px;
 }
 
-/* Username and dot aligned side by side */
 .username {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   color: #222;
   display: inline-flex;
   align-items: center;
   gap: 6px; /* space between name and dot */
 }
 
-/* Dot styling */
 .status-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.12);
 }
 
-/* Green color for online */
 .green {
   background-color: rgb(159, 236, 44);
 }
 
 .email {
-  font-size: 13px;
+  font-size: 12px;
   color: #555;
   margin-left: 0;
 }

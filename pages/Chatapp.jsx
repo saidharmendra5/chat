@@ -6,7 +6,7 @@ import ChatList from './ChatList';
 import { UserDetails } from '../contex/IsLoggedIn';
 
 const Chatapp = () => {
-  const { loggeduser ,onlineUserslist , setOnlineUsersList } = useContext(UserDetails);
+  const { loggeduser ,onlineUserslist , setOnlineUsersList , selecteduser } = useContext(UserDetails);
   const socket = useRef(null);
   const [messagelist, setMessageList] = useState([]);
 
@@ -58,10 +58,13 @@ const Chatapp = () => {
   };
 
   return (
-    <div className="holder">
-      <ChatList />
+    
+      
       <div className="big">
-        <h2>Messenger</h2>
+        <div className="chat-header">
+  <h3>{selecteduser.fullname}</h3>
+  <p>{selecteduser.email}</p>
+</div>
 
         <div className="chat-area">
           {messagelist.map((msg, i) => (
@@ -80,7 +83,7 @@ const Chatapp = () => {
           </form>
         </div>
       </div>
-    </div>
+    
   );
 };
 
