@@ -1,12 +1,35 @@
-# React + Vite
+# 💬 Real-Time Chat App (MERN + Socket.IO)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![React](https://img.shields.io/badge/Frontend-React-blue?logo=react)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-green?logo=node.js)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen?logo=mongodb)
+![Socket.IO](https://img.shields.io/badge/Realtime-Socket.IO-black?logo=socket.io)
 
-Currently, two official plugins are available:
+A full-stack real-time chat application built using the **MERN stack** (MongoDB, Express.js, React, Node.js) integrated with **Socket.IO** for instant communication between users.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔐 User Authentication (JWT + httpOnly Cookies)
+- 💬 Real-Time Chat using Socket.IO
+- 🟢 Live Online/Offline User Presence
+- 💾 MongoDB-Persisted Messages
+- 📱 Fully Responsive React UI
+- ⚡ Efficient Socket Cleanup and Reconnection
+- 🔄 Protected Routes with Context API
+
+---
+
+## 🛠 Tech Stack
+
+| Layer       | Technology               |
+|-------------|---------------------------|
+| Frontend    | React.js, Context API, CSS |
+| Backend     | Node.js, Express.js       |
+| Realtime    | Socket.IO                 |
+| Database    | MongoDB + Mongoose        |
+| Auth        | JSON Web Tokens, Cookies  |
+
+---
