@@ -1,92 +1,156 @@
 .chatlist-container {
-  max-width: 350px; /* reduced width */
-  margin: 20px;
-  padding: 16px;
-  border-radius: 14px;
-  background-color: #ffffff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  font-family: 'Segoe UI', sans-serif;
-  height: calc(100vh - 170px);
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-secondary);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .chatlist-title {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 12px;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
 }
 
 .chatlist-buttons {
-  flex-grow: 1;
+  flex: 1;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-right: 4px;
+  padding: 1rem;
 }
 
-/* Optional scrollbar styling */
 .chatlist-buttons::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
+
 .chatlist-buttons::-webkit-scrollbar-thumb {
-  background-color: #ccc;
+  background: var(--bg-tertiary);
   border-radius: 4px;
 }
 
 .chatlist-button {
   display: flex;
-  align-items: flex-start;
-  text-align: left;
-  background-color: #f4f4f4;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: var(--bg-card);
   border: none;
-  border-radius: 10px;
-  padding: 10px;
-  transition: background-color 0.2s ease;
+  border-radius: 12px;
+  border: 1px solid var(--border);
   cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
 }
 
 .chatlist-button:hover {
-  background-color: #e8e8e8;
+  background: var(--bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.chatlist-button.selected {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: var(--glow);
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  margin-right: 1rem;
+  position: relative;
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
-  width: 100%;
-}
-
-.user-name-status {
-  margin-bottom: 4px;
+  flex: 1;
+  min-width: 0;
 }
 
 .username {
   font-weight: 600;
-  font-size: 15px;
-  color: #222;
-  display: inline-flex;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  display: flex;
   align-items: center;
-  gap: 6px; /* space between name and dot */
+  gap: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.12);
-}
-
-.green {
-  background-color: rgb(159, 236, 44);
+.chatlist-button.selected .username {
+  color: white;
 }
 
 .email {
-  font-size: 12px;
-  color: #555;
-  margin-left: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chatlist-button.selected .email {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-card);
+  background: var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-indicator.offline {
+  background: var(--text-muted);
+  animation: none;
+}
+
+/* Empty state */
+.chatlist-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem;
+}
+
+.chatlist-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.chatlist-empty-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.chatlist-empty-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.7;
 }

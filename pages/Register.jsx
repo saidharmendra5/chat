@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import {Link ,  Navigate,  Outlet,  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
+import LoadingOverlay from '../components/LoadingOverlay';
 const Register = () => {
   const [registerstate , setRegisterState] = useState(null);
 
   const {
       register,
       handleSubmit, 
-      watch,
        formState: { errors , isSubmitting } 
       } = useForm();
 
       const onSubmit = async (data) => {
-        //await delay(3) //used to simpulate API  or  network delay .
         console.log(data)
         
         try{
@@ -36,37 +35,81 @@ const Register = () => {
 }
 
   return (
-    <div className="big-form-container">
-    <div className='form-container'>
-      {isSubmitting && <div className="loader-overlay"> <div className="spinner"></div></div>}
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input placeholder="fullname "type="text" {...register("fullname" , {
-               required :{value:true , message:"* fullname is required"},
-               minLength:{value:5 , message: "fullname must be atleast 5 characters"} ,
-               maxLength :{value:15 , message: "fullname must not exceed 10 characters"} 
-            }
-            )} />
-            
-            {errors.fullname && <div>{errors.fullname.message}</div>}
-            
-            <input placeholder="password" type="password" {...register("password", {required: {value:true , message:"* password is required"} ,
-            minLength:{value:5 , message:"password is too short."},
-            maxLength:{value:10 , message:"password is too long."}
-            })} />
-            
-            {errors.password && <div>{errors.password.message}</div>}
-            
-            <input placeholder="e-mail" type="email" {...register("email" , {required: { value:true , message:"* E-mail is required"}})} />
-            
-            {errors.email && <div>{errors.email.message}</div>}
-            
-            <input disabled={isSubmitting} type="submit" value="create account" />
-          <div className="form-switch" > <Link to="/" >already a user? Login</Link> </div>
-            
+    <div className="auth-container">
+      {isSubmitting && <LoadingOverlay message="Creating your account..." />}
+      
+      <div className='auth-form-container'>
+        <div className="auth-header">
+          <h1 className="auth-title">Join ChatSphere</h1>
+          <p className="auth-subtitle">Create your account to start chatting</p>
+        </div>
+
+        <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-group">
+            <input 
+              className="form-input"
+              placeholder="Enter your full name"
+              type="text" 
+              {...register("fullname", {
+                required: { value: true, message: "Full name is required" },
+                minLength: { value: 2, message: "Name must be at least 2 characters" },
+                maxLength: { value: 50, message: "Name must not exceed 50 characters" }
+              })} 
+            />
+            {errors.fullname && <div className="form-error">{errors.fullname.message}</div>}
+          </div>
+
+          <div className="form-group">
+            <input 
+              className="form-input"
+              placeholder="Enter your email"
+              type="email" 
+              {...register("email", { 
+                required: { value: true, message: "Email is required" },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Please enter a valid email address"
+                }
+              })} 
+            />
+            {errors.email && <div className="form-error">{errors.email.message}</div>}
+          </div>
+
+          <div className="form-group">
+            <input 
+              className="form-input"
+              placeholder="Create a password"
+              type="password" 
+              {...register("password", {
+                required: { value: true, message: "Password is required" },
+                minLength: { value: 6, message: "Password must be at least 6 characters" },
+                maxLength: { value: 50, message: "Password must not exceed 50 characters" }
+              })} 
+            />
+            {errors.password && <div className="form-error">{errors.password.message}</div>}
+          </div>
+
+          <button 
+            className="form-submit" 
+            disabled={isSubmitting} 
+            type="submit"
+          >
+            {isSubmitting ? 'Creating Account...' : 'Create Account'}
+          </button>
         </form>
-        {registerstate && <p>{registerstate}</p>}
-        
-    </div>
+
+        <div className="auth-switch">
+          <Link to="/" className="auth-switch-link">
+            Already have an account? Sign in
+          </Link>
+        </div>
+
+        {registerstate && (
+          <div className={`auth-message ${registerstate.includes('successful') ? 'success' : 'error'}`}>
+            {registerstate}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -1,8 +1,8 @@
-
-import { set, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useContext, useState } from 'react';
-import {Link ,  Navigate,  Outlet,  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
+import LoadingOverlay from '../components/LoadingOverlay';
 
 const Login = () => {
   const [loginState , setLoginState] = useState(null);
@@ -10,20 +10,10 @@ const Login = () => {
    const {
      register,
       handleSubmit, 
-      watch,
        formState: { errors , isSubmitting} 
       } = useForm();
 
-// const delay = (time) => {
-//     return new Promise((resolve , reject) => {   //to simulate network delay
-//       setTimeout(() => {
-//         resolve()
-//       }, time * 1000);
-//     })
-// }
-
 const onSubmit = async (data) => {
-    // await delay(3)                                //to simulate network delay
      console.log(data);
      try{
 
@@ -48,27 +38,66 @@ const onSubmit = async (data) => {
 }
 
   return (
-    <div className='big-form-container'>
-    <div className='form-container'>
+    <div className='auth-container'>
+      {isSubmitting && <LoadingOverlay message="Signing you in..." />}
       
-      
-      {isSubmitting && <div className="loader-overlay"> <div className="spinner"></div></div>}
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input placeholder="email" {...register("email" , {required:{value: true , message: "* email is required"}})}type="email"  />  
-            <br />
-            {errors.email &&  <div> {errors.email.message}</div> }
-            <br />
-            <input placeholder="password" {...register("password" ,{ required:{value:true , message: "* password is required"}})} type="password"  />
-            <br />
-            {errors.password && <div>{errors.password.message}</div>}
-            <br />
-            <input disabled={isSubmitting} type="submit" value="submit" />
-            <div className="form-switch"><Link to="/register" className="form-switch">Don't have an account?  Register</Link></div>
-            
-      
+      <div className='auth-form-container'>
+        <div className="auth-header">
+          <h1 className="auth-title">Welcome Back</h1>
+          <p className="auth-subtitle">Sign in to continue your conversations</p>
+        </div>
+
+        <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-group">
+            <input 
+              className="form-input"
+              placeholder="Enter your email" 
+              {...register("email", {
+                required: { value: true, message: "Email is required" },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Please enter a valid email address"
+                }
+              })}
+              type="email"  
+            />
+            {errors.email && <div className="form-error">{errors.email.message}</div>}
+          </div>
+
+          <div className="form-group">
+            <input 
+              className="form-input"
+              placeholder="Enter your password" 
+              {...register("password", { 
+                required: { value: true, message: "Password is required" },
+                minLength: { value: 6, message: "Password must be at least 6 characters" }
+              })} 
+              type="password"  
+            />
+            {errors.password && <div className="form-error">{errors.password.message}</div>}
+          </div>
+
+          <button 
+            className="form-submit" 
+            disabled={isSubmitting} 
+            type="submit"
+          >
+            {isSubmitting ? 'Signing In...' : 'Sign In'}
+          </button>
         </form>
-        {loginState && <p>{loginState}</p>}
-    </div>
+
+        <div className="auth-switch">
+          <Link to="/register" className="auth-switch-link">
+            Don't have an account? Create one
+          </Link>
+        </div>
+
+        {loginState && (
+          <div className={`auth-message ${loginState.includes('successful') ? 'success' : 'error'}`}>
+            {loginState}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

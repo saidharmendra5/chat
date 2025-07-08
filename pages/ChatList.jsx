@@ -4,7 +4,7 @@ import { UserDetails } from '../contex/IsLoggedIn';
 
 const ChatList = () => {
   const [friends, setFriends] = useState([]);
-  const{onlineUserslist , selecteduser , setSelecteduser} = useContext(UserDetails);
+  const { onlineUserslist, selecteduser, setSelecteduser } = useContext(UserDetails);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -31,35 +31,62 @@ const ChatList = () => {
     getFriends();
   }, []);
 
+  const getInitials = (name) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <div className="chatlist-container">
-      <h2 className="chatlist-title">Friends</h2>
+      <h2 className="chatlist-title">
+        <i className="fas fa-users"></i>
+        Friends ({friends.length})
+      </h2>
+      
       <div className="chatlist-buttons">
-        {friends.map((val, index) => {
-  const isOnline = onlineUserslist.includes(val._id);
+        {friends.length === 0 ? (
+          <div className="chatlist-empty">
+            <div className="chatlist-empty-icon">👥</div>
+            <div className="chatlist-empty-text">No friends yet</div>
+            <div className="chatlist-empty-subtitle">Add some friends to start chatting!</div>
+          </div>
+        ) : (
+          friends.map((friend, index) => {
+            const isOnline = onlineUserslist.includes(friend._id);
+            const isSelected = selecteduser && selecteduser._id === friend._id;
 
-  return (
-    <button key={index} onClick={() => {
-      setSelecteduser({ 
-  _id: val._id, 
-  fullname: val.fullname, 
-  email: val.email 
-});
-
-    }} className="chatlist-button">
-      <div className="user-info">
-        <span className="username">
-  {val.fullname}
-  {isOnline && <span className="status-dot green" title="Online"></span>}
-</span>
-
-        <span className="email">{val.email}</span>
-      </div>
-    </button>
-  );
-})}
-
-
+            return (
+              <button 
+                key={index} 
+                onClick={() => {
+                  setSelecteduser({ 
+                    _id: friend._id, 
+                    fullname: friend.fullname, 
+                    email: friend.email 
+                  });
+                }} 
+                className={`chatlist-button ${isSelected ? 'selected' : ''}`}
+              >
+                <div className="user-avatar">
+                  {getInitials(friend.fullname)}
+                  <div className={`status-indicator ${isOnline ? 'online' : 'offline'}`}></div>
+                </div>
+                
+                <div className="user-info">
+                  <div className="username">
+                    {friend.fullname}
+                    {isOnline && <i className="fas fa-circle" style={{ color: 'var(--success)', fontSize: '0.5rem' }}></i>}
+                  </div>
+                  <div className="email">{friend.email}</div>
+                </div>
+              </button>
+            );
+          })
+        )}
       </div>
     </div>
   );
