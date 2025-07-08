@@ -11,7 +11,7 @@ const NavBar = () => {
         
         <NavLink to="chat" className="nav-link">Chat</NavLink>
         <NavLink to="add" className="nav-link">Add Friends</NavLink>
-        <NavLink to="about" className="nav-link">About</NavLink>
+        
         
         <NavLink to="profile" className="nav-link">Profile</NavLink>
 
